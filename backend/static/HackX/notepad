@@ -1,0 +1,17 @@
+Features:
+    real time Progress Tracking for parents and teachers.
+    AI algorithm for learning the learning style of every individual and storing them in a separate row for each child in the database.
+    The AI algorithm will use the learned style of the individual to give personally catered recommendations for the learning of the child.
+    Different and innovative ways of learning for students.(games, videos, quizes, storytelling)
+    make content engaging as students with adhd suffer from lack of focus. they are hyperactive.
+    reward system.
+    1-1 sessions with teachers.(subscribe)
+    meditation and focus related activities.
+    Get age and disability of the student at the start when opening the website for the first time and give the content based on those parameters.
+    If the child has no disabilities, then the default homepage will suffice.
+
+
+
+My tasks:
+    login module
+    frontend of all the learning methods and ui

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tracking</title>
+</head>
+<body>
+    <h1>Progress Tracking</h1>
+    <table>
+    <thead>
+        <tr>
+            <th>Content</th>
+            <th>Progress Percentage</th>
+            <th>Last Accessed</th>
+            <th>Time Spent (Hours)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for progress in progress_data %}
+        <tr>
+            <td>{{ progress.content }}</td>
+            <td>{{ progress.progress_percentage }}%</td>
+            <td>{{ progress.last_accessed }}</td>
+            <td>{{ progress.time_spent }}</td>  <!-- Display the time spent -->
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script>
+    let startTime = Date.now();
+
+    window.onbeforeunload = function () {
+        let endTime = Date.now();
+        let timeSpent = (endTime - startTime) / 1000 / 3600;  // Time spent in hours
+        fetch('/update-time-spent/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'  // Django's CSRF token for security
+            },
+            body: JSON.stringify({
+                content: '{{ content_name }}',  // Pass the content being viewed
+                time_spent: timeSpent
+            })
+        });
+    };
+</script>
+
+</body>
+</html>

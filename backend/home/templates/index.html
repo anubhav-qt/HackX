@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<link rel="shortcut icon" type="png" href="{% static 'images/icon/favicon.png' %}">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Comaptible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Website</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script>
+		$(window).on('scroll', function(){
+  			if($(window).scrollTop()){
+  			  $('nav').addClass('black');
+ 			 }else {
+ 		   $('nav').removeClass('black');
+ 		 }
+		})
+	</script>
+</head>
+<body>
+<!-- Navigation Bar -->
+	<header id="header">
+		<nav>
+			<div class="logo"><img src="{% static 'images/logo.png' %}" alt="logo"></div>
+			<ul>
+				<li><a class="active" href="">Home</a></li>
+				<li><a href="#services_section">Services</a></li>
+				<li><a href="#">Learning</a></li>
+			</ul>
+			<div class="srch"><input type="text" class="search" placeholder="Search here..."><img src="{% static 'images/icon/search.svg' %}" alt="search" onclick=slide()></div>
+			<a class="get-started" href="../../../HackX/login.html">Sign In</a>
+			<img src="{% static 'images/icon/menu.png' %}" class="menu" onclick="sideMenu(0)" alt="menu">
+		</nav>
+		<div class="head-container">
+			<div class="quote">
+				<p>Learning for Everyone</p>
+				<h5>Welcome to a new era of education where every learner’s unique needs are celebrated. Together, we’re transforming challenges into opportunities, ensuring that every student has the support they need to thrive and succeed.</h5>
+			</div>
+			<div class="svg-image">
+				<img src="{% static 'images/extra/home.png' %}" alt="svg">
+			</div>
+		</div>
+	</header>
+
+
+
+<!-- SERVICES -->
+	<div class="service-swipe">
+		<div class="diffSection" id="services_section">
+		<center><p style="font-size: 50px; padding: 100px; padding-bottom: 40px; color: #fff;">Services</p></center>
+		</div>
+		<a href="../../../HackX/subjects/computer_courses.html"><div class="s-card"><img src="{%static 'images/icon/computer-courses.png'%}"><p>Online Courses</p></div></a>
+		<a href="../../../HackX/subjects/jee.html#sample_papers"><div class="s-card"><img src="{%static 'images/icon/online-tutorials.png'%}"><p>One-on-One Sessions</p></div></a>
+		<a href="#"><div class="s-card"><img src="{%static 'images/icon/p3.png'%}"><p>Progress Tracking</p></div></a>
+		<a href="#contactus_section"><div class="s-card"><img src="{%static 'images/icon/papers.jpg'%}"><p>Building Focus</p></div></a>
+		<a href="../../../HackX/subjects/quiz.html"><div class="s-card"><img src="{%static 'images/icon/brainbooster.png'%}"><p>Daily Quizes</p></div></a>
+		<a href="#contactus_section"><div class="s-card"><img src="{%static 'images/icon/help.png'%}"><p>24x7 Online Support</p></div></a>
+	</div>
+
+<!-- Some Popular Subjects -->
+	<div class="title">
+		<span>Trending</span>
+	</div>
+	<br><br>
+	<div class="course">
+		<center><div class="cbox">
+		<div class="det"><a href=""><img src="{%static 'images/courses/paper.png' %}">Mathematics</a></div>
+		<div class="det"><a href=""><img src="{%static 'images/courses/paper.png' %}">English</a></div>
+		<div class="det"><a href=""><img src="{%static 'images/courses/paper.png'%}">Science</a></div>
+		</div></center>
+		<div class="cbox">
+		<div class="det"><a href="../../../HackX/subjects/quiz.html"><img src="{%static 'images/courses/algo.png'%}">Daily Quiz</a></div>
+		<div class="det"><a href="../../../HackX/subjects/computer_courses.html"><img src="{%static 'images/courses/computer.png'%}">Games</a></div>
+		</div>
+	</div>
+
+
+<!-- CONTACT US -->
+	<div class="diffSection" id="contactus_section">
+		<center><p style="font-size: 50px; padding: 100px">Contact Us</p></center>
+		<div class="csec"></div>
+		<div class="back-contact">
+			<div class="cc">
+			<form action="mailto:magicalfizz@gmail.com" method="post" enctype="text/plain">
+				<label>First Name <span class="imp">*</span></label><label style="margin-left: 185px">Last Name <span class="imp">*</span></label><br>
+				<center>
+				<input type="text" name="" style="margin-right: 10px; width: 175px" required="required"><input type="text" name="lname" style="width: 175px" required="required"><br>
+				</center>
+				<label>Email <span class="imp">*</span></label><br>
+				<input type="email" name="mail" style="width: 100%" required="required"><br>
+				<label>Message <span class="imp">*</span></label><br>
+				<input type="text" name="message" style="width: 100%" required="required"><br>
+				<label>Additional Details</label><br>
+				<textarea name="addtional"></textarea><br>
+				<button type="submit" id="csubmit">Send Message</button>
+			</form>
+			</div>
+		</div>
+	</div>
+
+<!-- FOOTER -->
+	<footer>
+		<div class="footer-container">
+			<div class="left-col">
+				<img src="" style="width: 200px;" alt="logo">
+				<div class="logo"></div>
+				<div class="social-media">
+					<a href="#"><img src="images/icon\insta.png"></a>
+					<a href="#"><img src="images/icon\ytube.png"></a>
+					<a href="#"><img src="images/icon\linkedin.png"></a>
+		</div>
+	</footer>
+
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Learning for Kids</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-y: auto; /* Enable vertical scroll */
+      transition: filter 0.3s ease, font-size 0.3s ease;
+    }
+
+    /* Animated Background Gradient */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #ff4d4d, #ffcccc, #ffe6e6, #ff6666);
+      background-size: 400% 400%;
+      z-index: -2;
+      animation: gradientAnimation 10s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating animated circles */
+    .floating-circles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .circle {
+      position: absolute;
+      background-color: rgba(255, 102, 102, 0.2);
+      border-radius: 50%;
+      animation: float 10s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px) scale(1);
+      }
+      50% {
+        transform: translateY(-100px) scale(1.1);
+      }
+      100% {
+        transform: translateY(0px) scale(1);
+      }
+    }
+
+    .circle:nth-child(1) {
+      width: 150px;
+      height: 150px;
+      bottom: -50px;
+      left: 20%;
+      animation-duration: 12s;
+    }
+
+    .circle:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      top: -100px;
+      left: 50%;
+      animation-duration: 15s;
+    }
+
+    .circle:nth-child(3) {
+      width: 100px;
+      height: 100px;
+      bottom: 0;
+      left: 80%;
+      animation-duration: 8s;
+    }
+
+    .circle:nth-child(4) {
+      width: 300px;
+      height: 300px;
+      top: -150px;
+      right: 10%;
+      animation-duration: 18s;
+    }
+
+    header {
+      background-color: rgba(255, 77, 77, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 2em;
+      color: #fff;
+      font-size: 1.5rem;
+      z-index: 1;
+    }
+
+    header .logo img {
+      width: 200px;
+      height: auto;
+    }
+
+    header nav {
+      display: flex;
+      gap: 1.5em;
+      align-items: center;
+    }
+
+    header nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 0.5em;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    header .sign-in {
+      background-color: #ff3b3b;
+      padding: 0.5em 1em;
+      border-radius: 20px;
+      color: white;
+      cursor: pointer;
+    }
+
+    main {
+      flex: 1;
+      padding: 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1;
+      gap: 2em;
+      flex-wrap: wrap;
+    }
+
+    .main-content {
+      flex: 1 1 40%;
+      max-width: 100%;
+    }
+
+    .main-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1em;
+    }
+
+    .main-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1em;
+    }
+
+    .main-content .search-bar {
+      display: flex;
+      gap: 1em;
+      align-items: center;
+    }
+
+    .main-content input[type="search"] {
+      padding: 0.5em;
+      border: 2px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+    }
+
+    .main-content input[type="search"]:focus {
+      border-color: #ff6666;
+    }
+
+    .image-section {
+      flex: 1 1 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-section img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 20px;
+    }
+
+    /* Learning Modules Section */
+    .learning-modules {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin-top: 2em;
+    }
+
+    .module {
+      background-color: #ffe6e6;
+      padding: 1.5em;
+      border-radius: 15px;
+      text-align: center;
+      width: 25%;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      animation: bounceIn 1s ease-out;
+      transition: transform 0.3s ease;
+    }
+
+    .module:hover {
+      transform: scale(1.05);
+    }
+
+    /* Modern Button Styles for Play, Video, Quiz */
+    .play-btn, .video-btn, .quiz-btn {
+      background: linear-gradient(135deg, #ff6b6b, #d43f3f);
+      border: none;
+      color: white;
+      padding: 1em 2em;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      box-shadow: 0px 5px 10px rgba(255, 0, 0, 0.2);
+    }
+
+    .play-btn:hover, .video-btn:hover, .quiz-btn:hover {
+      background: linear-gradient(135deg, #ff3b3b, #bf2323);
+      transform: translateY(-5px);
+      box-shadow: 0px 10px 20px rgba(255, 0, 0, 0.4);
+    }
+
+    .play-btn:active, .video-btn:active, .quiz-btn:active {
+      transform: translateY(0px) scale(0.95);
+    }
+
+    /* Adjust Experience Button */
+    .adjust-experience-btn {
+      background: linear-gradient(135deg, #ff6666, #ff3b3b);
+      color: white;
+      padding: 0.5em 1.2em;
+      font-size: 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto 2em;
+    }
+
+    .adjust-experience-btn:hover {
+      background: linear-gradient(135deg, #d43f3f, #bf2323);
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 2em;
+      border-radius: 15px;
+      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+      display: none;
+      z-index: 999;
+    }
+
+    .modal.active {
+      display: block;
+    }
+
+    .modal-header {
+      font-size: 1.5rem;
+      margin-bottom: 1em;
+    }
+
+    .modal label {
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 0.5em;
+    }
+
+    .modal input[type="range"] {
+      width: 100%;
+      margin-bottom: 1.5em;
+    }
+
+    .modal .close-btn {
+      background: #ff6666;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* Footer Section */
+    footer {
+      background-color: rgba(255, 77, 77, 0.9);
+      text-align: center;
+      color: white;
+      padding: 1em;
+      z-index: 1;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .main-content, .image-section {
+        flex: 1 1 100%;
+      }
+
+      .learning-modules {
+        flex-direction: column;
+        gap: 1em;
+      }
+
+      .module {
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <img src="WhatsApp_Image_2024-09-05_at_23.51.37_fe57fbe4-removebg-preview.png" alt="Qurative Learning">
+    </div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <div class="sign-in">Sign In</div>
+    </nav>
+  </header>
+
+  <!-- Main Content Section -->
+  <main>
+    <div class="main-content">
+      <h1>Welcome to Interactive Learning for Kids</h1>
+      <p>Fun and engaging modules for children to learn at their own pace.</p>
+      <div class="search-bar">
+        <input type="search" placeholder="Search for topics...">
+      </div>
+    </div>
+    <div class="image-section">
+      <img src="C:\Users\tanma\Desktop\MUJ hacx\MC0030-HRD-Ministry-Guidelines-and-Ways-for-Interactive-Learning-2-1024x576.jpg" alt="Learning Image">
+    </div>
+  </main>
+
+  <!-- Adjust Experience Button centered above modules -->
+  <button class="adjust-experience-btn">Adjust Experience</button>
+
+  <!-- Learning Modules Section -->
+  <section class="learning-modules">
+    <div class="module">
+      <h3>Play & Learn</h3>
+      <button class="play-btn">Start Playing</button>
+    </div>
+    <div class="module">
+      <h3>Watch Videos</h3>
+      <button class="video-btn">Watch Now</button>
+    </div>
+    <div class="module">
+      <h3>Take a Quiz</h3>
+      <button class="quiz-btn">Take Quiz</button>
+    </div>
+  </section>
+
+  <!-- Floating Circles for Animated Background -->
+  <div class="floating-circles">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2024 Interactive Learning. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
